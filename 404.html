@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ayoub Attar — Portfolio</title>
+  <script>
+    // GitHub Pages SPA redirect trick.
+    // Stores the full path in sessionStorage then redirects to root.
+    var path = window.location.pathname;
+    var search = window.location.search;
+    var hash = window.location.hash;
+    sessionStorage.setItem(
+      'redirect',
+      path + (search ? search : '') + (hash ? hash : '')
+    );
+    window.location.replace(
+      window.location.origin + window.location.pathname.split('/').slice(0, 2).join('/')
+    );
+  </script>
+</head>
+<body></body>
+</html>
