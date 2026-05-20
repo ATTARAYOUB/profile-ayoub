@@ -95,10 +95,10 @@ const EDUCATION = [
     role: 'Licence — ILSI',
     company: 'Université Spécialisée',
     location: 'Morocco',
-    period: '2022 — Present',
+    period: '2025/2026',
     current: true,
     color: '#7b61ff',
-    badge: { label: 'In Progress', style: 'bg-emerald-400/10 border-emerald-400/40 text-emerald-400' },
+    badge: { label: 'Completed', style: 'bg-emerald-400/10 border-emerald-400/40 text-emerald-400' },
     bullets: [
       'Ingénierie Logicielle et Systèmes d\'Information',
       'Software engineering, information systems architecture',

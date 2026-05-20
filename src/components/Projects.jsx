@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaGithub, FaJava, FaPython, FaCode } from 'react-icons/fa'
+import { FaGithub, FaJava, FaPython, FaCode, FaStar, FaCodeBranch } from 'react-icons/fa'
 import { SiNodedotjs, SiDjango, SiFlutter } from 'react-icons/si'
+import { fetchGitHubRepos, getTechColor, formatDate } from '../utils/githubApi'
 
 // ── Project data ─────────────────────────────────────────────────────────────
 const PROJECTS = [
@@ -89,7 +90,7 @@ function StatusBadge({ status }) {
 
 // ── Single project card ───────────────────────────────────────────────────────
 function ProjectCard({ project, index }) {
-  const { title, subtitle, description, github, status, tech, category, color, Icon } = project
+  const { title, subtitle, description, github, status, tech, category, color, Icon, stars, updatedAt, isGitHub } = project
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -134,7 +135,15 @@ function ProjectCard({ project, index }) {
           >
             {category}
           </span>
-          <StatusBadge status={status} />
+          {isGitHub && stars > 0 ? (
+            <div className="flex items-center gap-1 text-xs font-dm font-semibold px-2.5 py-1 rounded-full"
+              style={{ background: 'rgba(255,215,0,0.12)', border: '1px solid rgba(255,215,0,0.45)', color: '#ffd700' }}>
+              <FaStar size={12} />
+              {stars}
+            </div>
+          ) : (
+            <StatusBadge status={status} />
+          )}
         </div>
 
         {/* Row 2: tech icon */}
@@ -181,32 +190,39 @@ function ProjectCard({ project, index }) {
           ))}
         </div>
 
-        {/* Row 6: GitHub button */}
-        <motion.a
-          href={github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-dm font-semibold text-sm transition-all duration-300 mt-auto"
-          style={{
-            border:  `1px solid ${color}80`,
-            color,
-            background: 'transparent',
-          }}
-          whileHover={{
-            background: `${color}22`,
-            borderColor: color,
-          }}
-          whileTap={{ scale: 0.97 }}
-        >
-          <FaGithub size={16} />
-          View on GitHub
-          <motion.span
-            animate={hovered ? { x: 4 } : { x: 0 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+        {/* Row 6: GitHub button + metadata */}
+        <div className="flex flex-col gap-2">
+          <motion.a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-dm font-semibold text-sm transition-all duration-300"
+            style={{
+              border:  `1px solid ${color}80`,
+              color,
+              background: 'transparent',
+            }}
+            whileHover={{
+              background: `${color}22`,
+              borderColor: color,
+            }}
+            whileTap={{ scale: 0.97 }}
           >
-            →
-          </motion.span>
-        </motion.a>
+            <FaGithub size={16} />
+            View on GitHub
+            <motion.span
+              animate={hovered ? { x: 4 } : { x: 0 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            >
+              →
+            </motion.span>
+          </motion.a>
+          {isGitHub && updatedAt && (
+            <p className="text-xs text-white/40 text-center font-dm">
+              Updated {formatDate(updatedAt)}
+            </p>
+          )}
+        </div>
       </div>
     </motion.div>
   )
@@ -217,6 +233,19 @@ export default function Projects() {
   const ref = useRef(null)
   const [inView,         setInView]         = useState(false)
   const [activeFilter,   setActiveFilter]   = useState('All')
+  const [gitHubRepos,    setGitHubRepos]    = useState([])
+  const [loading,        setLoading]        = useState(true)
+
+  // Fetch GitHub repos on mount
+  useEffect(() => {
+    const loadRepos = async () => {
+      setLoading(true)
+      const repos = await fetchGitHubRepos()
+      setGitHubRepos(repos)
+      setLoading(false)
+    }
+    loadRepos()
+  }, [])
 
   useEffect(() => {
     const el = ref.current
@@ -229,9 +258,30 @@ export default function Projects() {
     return () => observer.disconnect()
   }, [])
 
+  // Combine featured projects with GitHub repos
+  const allProjects = [
+    ...PROJECTS,
+    ...gitHubRepos.slice(0, 6).map(repo => ({
+      title: repo.name,
+      subtitle: repo.description.substring(0, 60) + (repo.description.length > 60 ? '...' : ''),
+      description: repo.description,
+      github: repo.url,
+      status: 'Completed',
+      tech: repo.topics.length > 0 ? repo.topics : [repo.language || 'Code'],
+      category: 'GitHub Project',
+      color: getTechColor(repo.language),
+      Icon: FaGithub,
+      stars: repo.stars,
+      updatedAt: repo.updatedAt,
+      isGitHub: true,
+    }))
+  ]
+
+  const filters = ['All', 'Web App', 'Desktop App', 'Full-Stack', 'In Development', 'GitHub Project']
+
   const filtered = activeFilter === 'All'
-    ? PROJECTS
-    : PROJECTS.filter((p) => p.category === activeFilter)
+    ? allProjects
+    : allProjects.filter((p) => p.category === activeFilter)
 
   return (
     <section id="projects" className="section-padding relative" ref={ref}>
@@ -284,7 +334,7 @@ export default function Projects() {
           transition={{ duration: 0.5, delay: 0.25 }}
           className="flex flex-wrap gap-2 mb-8"
         >
-          {FILTERS.map((f) => {
+          {filters.map((f) => {
             const isActive = activeFilter === f
             return (
               <motion.button
@@ -314,9 +364,26 @@ export default function Projects() {
             transition={{ duration: 0.25 }}
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {filtered.map((project, i) => (
-              <ProjectCard key={project.title} project={project} index={i} />
-            ))}
+            {loading ? (
+              <div className="col-span-full text-center py-12">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                  className="inline-block"
+                >
+                  <FaGithub size={32} color="#00d4ff" />
+                </motion.div>
+                <p className="font-dm text-white/60 mt-4">Loading projects...</p>
+              </div>
+            ) : filtered.length > 0 ? (
+              filtered.map((project, i) => (
+                <ProjectCard key={project.title} project={project} index={i} />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="font-dm text-white/60">No projects found in this category.</p>
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
 
