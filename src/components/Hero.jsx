@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import {
   FaDownload, FaArrowDown,
   FaLinkedin, FaGithub,
   FaMapMarkerAlt,
 } from 'react-icons/fa'
+import { HiLightningBolt } from 'react-icons/hi'
 
 // ── Rotating titles ───────────────────────────────────────────────────────────
 const TITLES = [
@@ -311,6 +313,33 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.7 }}
             style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}
           >
+            {/* Why Hire Me - NEW PRIMARY CTA */}
+            <Link to="/hire-me" style={{ textDecoration: 'none' }}>
+              <motion.button
+                whileHover={{ scale: 1.02, filter: 'brightness(1.1)' }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                style={{
+                  display:      'inline-flex',
+                  alignItems:   'center',
+                  gap:          8,
+                  background:   'linear-gradient(135deg, #00d4ff, #7b61ff)',
+                  color:        '#ffffff',
+                  fontFamily:   'Orbitron, sans-serif',
+                  fontWeight:   700,
+                  fontSize:     15,
+                  padding:      '14px 32px',
+                  borderRadius: 8,
+                  border:       'none',
+                  cursor:       'pointer',
+                  boxShadow:    '0 4px 20px rgba(0,212,255,0.3)',
+                }}
+              >
+                <HiLightningBolt size={16} />
+                Why Hire Me?
+              </motion.button>
+            </Link>
+
             {/* Download CV */}
             <motion.button
               onClick={() => window.open('/cv-print.html', '_blank')}

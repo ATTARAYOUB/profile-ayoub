@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link, useLocation } from 'react-router-dom'
 import { useActiveSection } from '../hooks/useScrollAnimation'
 const NAV_LINKS = [
   { label: 'About',      href: '#about' },
@@ -15,6 +16,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const activeSection           = useActiveSection(SECTION_IDS)
+  const location                = useLocation()
+  const isHireMePage            = location.pathname === '/hire-me'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -94,14 +97,27 @@ export default function Navbar() {
                   </motion.a>
                 )
               })}
-              <motion.a
-                href="mailto:itsayoubattar@gmail.com"
-                className="ml-3 btn-primary text-sm py-2 px-4"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Hire Me
-              </motion.a>
+              {isHireMePage ? (
+                <Link to="/">
+                  <motion.button
+                    className="ml-3 btn-secondary text-sm py-2 px-4"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    ← Portfolio
+                  </motion.button>
+                </Link>
+              ) : (
+                <Link to="/hire-me">
+                  <motion.button
+                    className="ml-3 btn-primary text-sm py-2 px-4"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Hire Me
+                  </motion.button>
+                </Link>
+              )}
             </div>
 
             {/* ── Hamburger ── */}
@@ -149,15 +165,29 @@ export default function Navbar() {
                   {link.label}
                 </motion.a>
               ))}
-              <motion.a
-                href="mailto:itsayoubattar@gmail.com"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.05 }}
-                className="mt-2 btn-primary text-center"
-              >
-                Hire Me
-              </motion.a>
+              {isHireMePage ? (
+                <Link to="/">
+                  <motion.button
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: NAV_LINKS.length * 0.05 }}
+                    className="mt-2 btn-secondary text-center w-full"
+                  >
+                    ← Back to Portfolio
+                  </motion.button>
+                </Link>
+              ) : (
+                <Link to="/hire-me">
+                  <motion.button
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: NAV_LINKS.length * 0.05 }}
+                    className="mt-2 btn-primary text-center w-full"
+                  >
+                    Hire Me
+                  </motion.button>
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

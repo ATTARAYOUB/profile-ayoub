@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { MdLocationOn } from 'react-icons/md'
+import { HiLightningBolt } from 'react-icons/hi'
 
 // ── Contact section ──────────────────────────────────────────────────────────
 export default function Contact() {
@@ -114,9 +116,40 @@ export default function Contact() {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <div className="accent-line mx-auto" />
-          <p className="section-subheading">
+          <p className="section-subheading mb-4">
             Open to collaborations, opportunities, and interesting conversations
           </p>
+          
+          {/* Recruiter CTA */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="inline-block"
+          >
+            <Link to="/hire-me" style={{ textDecoration: 'none' }}>
+              <motion.div
+                whileHover={{ scale: 1.05, boxShadow: '0 8px 30px rgba(0,212,255,0.3)' }}
+                whileTap={{ scale: 0.98 }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  padding: '12px 28px',
+                  borderRadius: 12,
+                  background: 'linear-gradient(135deg, rgba(0,212,255,0.15), rgba(123,97,255,0.15))',
+                  border: '1.5px solid rgba(0,212,255,0.4)',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                <HiLightningBolt size={18} color="#00d4ff" />
+                <span className="font-dm font-semibold" style={{ color: '#00d4ff', fontSize: 14 }}>
+                  🎯 Recruiters: See Why I'm Different
+                </span>
+              </motion.div>
+            </Link>
+          </motion.div>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-10">

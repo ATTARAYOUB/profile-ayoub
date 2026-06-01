@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import {
   FaBriefcase, FaCode, FaDownload, FaArrowRight,
   FaLayerGroup, FaEnvelope, FaPhone, FaMapMarkerAlt,
-  FaLinkedin, FaGithub, FaGlobeAfrica,
+  FaLinkedin, FaGithub, FaGlobeAfrica, FaCheckCircle,
 } from 'react-icons/fa'
-import { HiAcademicCap } from 'react-icons/hi'
+import { HiAcademicCap, HiLightningBolt } from 'react-icons/hi'
 import { MdCake, MdWork, MdSchool } from 'react-icons/md'
 
 // ── Animated counter ──────────────────────────────────────────────────────────
