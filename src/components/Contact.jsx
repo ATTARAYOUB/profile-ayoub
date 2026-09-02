@@ -4,6 +4,18 @@ import {
   FiSend, FiCheckCircle, FiAlertCircle
 } from 'react-icons/fi'
 
+/* ── Formspree endpoint ─────────────────────────────────
+   To activate real email delivery (free, 2 minutes):
+   1. Go to https://formspree.io/f/new
+   2. Sign in with ATTAR.AYOUB@outlook.com
+   3. Create a form, copy the ID (e.g. "xpwzrqab")
+   4. Replace YOUR_FORM_ID below with that ID
+   Until then, the Send button falls back to mailto.
+──────────────────────────────────────────────────────── */
+const FORMSPREE_ID  = 'YOUR_FORM_ID'
+const FORMSPREE_URL = `https://formspree.io/f/${FORMSPREE_ID}`
+const DEST_EMAIL    = 'ATTAR.AYOUB@outlook.com'
+
 const CONTACT_ITEMS = [
   {
     icon:    <FiMail size={20} />,
@@ -45,22 +57,46 @@ const CONTACT_ITEMS = [
 ]
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
-  const [status, setStatus] = useState(null) // 'sending' | 'ok' | 'error'
+  const [form,   setForm]   = useState({ name: '', email: '', subject: '', message: '' })
+  const [status, setStatus] = useState(null)  // null | 'sending' | 'ok' | 'error'
 
   const handleChange = e =>
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    // Build mailto link as a simple, dependency-free send approach
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
-    )
-    const subject = encodeURIComponent(form.subject || 'Portfolio Contact')
-    window.open(`mailto:ATTAR.AYOUB@outlook.com?subject=${subject}&body=${body}`)
-    setStatus('ok')
-    setForm({ name: '', email: '', subject: '', message: '' })
+    setStatus('sending')
+
+    if (FORMSPREE_ID !== 'YOUR_FORM_ID') {
+      // Real HTTP POST → Formspree → forwarded to DEST_EMAIL
+      try {
+        const res = await fetch(FORMSPREE_URL, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            name:    form.name,
+            email:   form.email,
+            subject: form.subject || 'Portfolio Contact',
+            message: form.message,
+          }),
+        })
+        if (res.ok) {
+          setStatus('ok')
+          setForm({ name: '', email: '', subject: '', message: '' })
+        } else {
+          setStatus('error')
+        }
+      } catch {
+        setStatus('error')
+      }
+    } else {
+      // Fallback: open mailto pre-filled
+      const body    = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`)
+      const subject = encodeURIComponent(form.subject || 'Portfolio Contact')
+      window.open(`mailto:${DEST_EMAIL}?subject=${subject}&body=${body}`)
+      setStatus('ok')
+      setForm({ name: '', email: '', subject: '', message: '' })
+    }
   }
 
   return (
@@ -82,7 +118,7 @@ export default function Contact() {
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
 
-          {/* Contact info */}
+          {/* ── Left: contact info ── */}
           <div className="space-y-4">
             {CONTACT_ITEMS.map((item) => (
               item.href ? (
@@ -110,8 +146,8 @@ export default function Contact() {
               )
             ))}
 
-            {/* Availability note */}
-            <div className="p-4 rounded-xl bg-[#ECFDF5] border border-[#A7F3D0] flex items-start gap-3 mt-6">
+            {/* Response time */}
+            <div className="p-4 rounded-xl bg-[#ECFDF5] border border-[#A7F3D0] flex items-start gap-3 mt-2">
               <FiCheckCircle size={18} className="text-[#059669] flex-shrink-0 mt-0.5" />
               <div>
                 <p className="font-semibold text-[#065F46] text-sm">Response Time</p>
@@ -120,18 +156,59 @@ export default function Contact() {
                 </p>
               </div>
             </div>
+
+            {/* Direct email pill */}
+            <a
+              href="mailto:ATTAR.AYOUB@outlook.com"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border-2 border-dashed border-[#BFDBFE] text-[#2563EB] text-sm font-semibold hover:bg-[#EFF6FF] transition-colors"
+            >
+              <FiMail size={15} />
+              ATTAR.AYOUB@outlook.com
+            </a>
           </div>
 
-          {/* Contact form */}
+          {/* ── Right: form ── */}
           <div className="card p-7">
-            <h3 className="font-semibold text-[#0F172A] text-lg mb-6">Send a Message</h3>
+            <h3 className="font-semibold text-[#0F172A] text-lg mb-1">Send a Message</h3>
 
+            {/* Delivery note with linked email */}
+            <p className="text-xs text-[#94A3B8] mb-6 flex items-center gap-1.5 flex-wrap">
+              <FiMail size={11} className="flex-shrink-0" />
+              Messages are delivered directly to&nbsp;
+              <a
+                href="mailto:ATTAR.AYOUB@outlook.com"
+                className="text-[#2563EB] font-semibold hover:underline"
+              >
+                ATTAR.AYOUB@outlook.com
+              </a>
+            </p>
+
+            {/* Success state */}
             {status === 'ok' && (
-              <div className="mb-5 p-4 rounded-lg bg-[#ECFDF5] border border-[#A7F3D0] flex items-center gap-2">
-                <FiCheckCircle size={16} className="text-[#059669]" />
-                <p className="text-sm text-[#065F46] font-medium">
-                  Your email client should have opened. If not, email me directly at ATTAR.AYOUB@outlook.com
-                </p>
+              <div className="mb-5 p-4 rounded-lg bg-[#ECFDF5] border border-[#A7F3D0] flex items-start gap-2.5">
+                <FiCheckCircle size={16} className="text-[#059669] flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm text-[#065F46] font-semibold">Message sent!</p>
+                  <p className="text-xs text-[#047857] mt-0.5">
+                    Thank you — Ayoub will get back to you within 24–48 hours.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Error state */}
+            {status === 'error' && (
+              <div className="mb-5 p-4 rounded-lg bg-[#FEF2F2] border border-[#FECACA] flex items-start gap-2.5">
+                <FiAlertCircle size={16} className="text-[#DC2626] flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm text-[#991B1B] font-semibold">Something went wrong</p>
+                  <p className="text-xs text-[#B91C1C] mt-0.5">
+                    Please email directly at{' '}
+                    <a href="mailto:ATTAR.AYOUB@outlook.com" className="underline font-medium">
+                      ATTAR.AYOUB@outlook.com
+                    </a>
+                  </p>
+                </div>
               </div>
             )}
 
@@ -194,12 +271,30 @@ export default function Contact() {
                 />
               </div>
 
-              <button type="submit" className="btn-primary w-full justify-center">
-                <FiSend size={16} /> Send Message
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className="btn-primary w-full justify-center"
+                style={status === 'sending' ? { opacity: 0.7, cursor: 'wait' } : {}}
+              >
+                {status === 'sending' ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Sending…
+                  </>
+                ) : (
+                  <><FiSend size={16} /> Send Message</>
+                )}
               </button>
 
               <p className="text-xs text-center text-[#94A3B8]">
-                This will open your default email client pre-filled with your message.
+                Your message goes directly to{' '}
+                <a
+                  href="mailto:ATTAR.AYOUB@outlook.com"
+                  className="text-[#2563EB] hover:underline font-medium"
+                >
+                  ATTAR.AYOUB@outlook.com
+                </a>
               </p>
             </form>
           </div>
