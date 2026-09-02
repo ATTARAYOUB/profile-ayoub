@@ -54,7 +54,7 @@ const MHS_ROLE = {
       client: 'MHS',
       hospitals: [
         { name: 'CHU Marrakech',    period: 'July 2024 → Present' },
-        { name: 'CHU Hassan II Fès', period: '2023 → June 2023'   },
+        { name: 'CHU Hassan II Fès', period: 'January 2023 → June 2023' },
       ],
     },
   ],
