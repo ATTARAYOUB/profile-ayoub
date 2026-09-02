@@ -1,154 +1,80 @@
 # Ayoub Attar — Portfolio
 
-Premium portfolio website for **Attar Ayoub**, Healthcare Tech Expert & Full Stack Developer.
+> Full-Stack Engineer specializing in Hospital Pharmacy Automation & Healthcare IT
 
-## 🌐 Live URLs
+**Live site:** [profile-ayoub.pages.dev](https://profile-ayoub.pages.dev)
 
-| Platform | URL | Status |
-|----------|-----|--------|
-| Vercel   | https://attarayoub.vercel.app | Primary ✅ |
-| GitHub Pages | https://attarayoub.github.io/portfolio | Backup ✅ |
-| Netlify  | https://ayoubattar.netlify.app | Extra ✅ |
+---
+
+## About
+
+Personal portfolio for **Ayoub Attar**, a Moroccan full-stack engineer with hands-on experience maintaining BD Rowa and Pyxis automated pharmacy systems in university hospitals (CHU Marrakech & Fès), and building secure, reliable software for clinical environments.
+
+**Core stack:** Java · Spring Boot · Python · Django · Flutter · React  
+**Domain expertise:** BD Rowa VMAX 160 · Pyxis Medstation · HL7 Integration · Hospital IT
+
+---
+
+## Sections
+
+- **Hero** — headline, availability badge, profile card, CTAs
+- **About** — bio, languages, location, what I bring
+- **Experience** — 6 roles, collapsible timeline (2020 – present)
+- **Skills** — 8 categories with Expert / Advanced / Intermediate / Familiar badges
+- **Healthcare Technology** — BD Rowa, Pyxis, HL7, hospital expertise
+- **Projects** — 4 featured projects + GitHub repo badges
+- **Freelance & Contract Work** — services, engagement models, contact
+- **Certifications** — 8 verified credentials (IBM, Udemy, LinkedIn Learning…)
+- **FAQ** — chat-bubble UI + accordion Q&A
+- **Contact** — contact form + direct contact info
+
+---
 
 ## Tech Stack
 
-React 18, Vite, Tailwind CSS v3, Framer Motion, React Icons
+| Tool | Version |
+|------|---------|
+| React | 18 |
+| Vite | 5 |
+| Tailwind CSS | 3 |
+| React Icons | 5 |
+| Framer Motion | 11 |
 
-## Getting Started
+---
+
+## Run Locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build for Production
+## Build
 
 ```bash
 npm run build
-npm run preview
 ```
 
----
-
-## 🚀 Deployment Guide
-
-### Step 1 — Push to GitHub
-
-```bash
-git init
-git add .
-git commit -m "Portfolio Ayoub Attar"
-git branch -M main
-git remote add origin https://github.com/ATTARAYOUB/portfolio.git
-git push -u origin main
-```
-
-For updates:
-```bash
-git add .
-git commit -m "Update portfolio"
-git push
-```
+Output goes to `dist/`.
 
 ---
 
-### Option 1 — Vercel (Recommended ⚡)
+## Deployment
 
-1. Go to [vercel.com](https://vercel.com)
-2. Sign up with GitHub (free)
-3. Click **Add New Project** → Import `ATTARAYOUB/portfolio`
-4. Settings:
-   - Framework: **Vite**
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Install Command: `npm install`
-5. Click **Deploy**
-6. Customize subdomain: Project Settings → Domains → Edit → `attarayoub.vercel.app`
+The site is hosted on **Cloudflare Pages**, connected to this repository.  
+Every push to `main` triggers an automatic build and deploy.
 
-Auto-deploys on every `git push` ✅
+A GitHub Actions workflow (`.github/workflows/deploy.yml`) is also configured as a backup for GitHub Pages.
 
 ---
 
-### Option 2 — GitHub Pages (Free forever)
+## Contact
 
-**Method A — GitHub Actions (automatic):**
-
-The `.github/workflows/deploy.yml` file is already configured.
-Just push to `main` — it deploys automatically.
-
-Then go to: **GitHub repo → Settings → Pages → Source → gh-pages branch**
-
-Your URL: `https://attarayoub.github.io/portfolio`
-
-**Method B — Manual deploy:**
-
-```bash
-npm install
-npm run deploy
-```
-
-> Note: GitHub Pages uses `base: '/portfolio/'` via the `VITE_BASE_PATH` env variable set in the workflow.
+- **Email:** ATTAR.AYOUB@outlook.com  
+- **LinkedIn:** [linkedin.com/in/itsayoubattar](https://linkedin.com/in/itsayoubattar)  
+- **GitHub:** [github.com/ATTARAYOUB](https://github.com/ATTARAYOUB)  
+- **Location:** Casablanca, Morocco — open to remote & relocation
 
 ---
 
-### Option 3 — Netlify
-
-**Method A — Drag & Drop (fastest, no GitHub needed):**
-
-1. Run `npm run build` locally
-2. Go to [app.netlify.com/drop](https://app.netlify.com/drop)
-3. Drag the `dist/` folder onto the page
-4. Instant deploy ✅
-5. Site Settings → Change site name → `ayoubattar`
-6. URL: `https://ayoubattar.netlify.app`
-
-**Method B — GitHub auto-deploy:**
-
-1. Go to [netlify.com](https://netlify.com) → New site from Git
-2. Connect GitHub → Select `ATTARAYOUB/portfolio`
-3. Build command: `npm run build`
-4. Publish directory: `dist`
-5. Deploy ✅
-
----
-
-## 🆓 Free Custom Domain Options
-
-| Option | Domain | Cost | Notes |
-|--------|--------|------|-------|
-| Vercel subdomain | `attarayoub.vercel.app` | Free forever | Instant |
-| GitHub Pages | `attarayoub.github.io/portfolio` | Free forever | Instant |
-| Netlify subdomain | `ayoubattar.netlify.app` | Free forever | Instant |
-| is-a.dev | `ayoubattar.is-a.dev` | Free forever | PR approval ~1-2 days |
-| GitHub Student Pack | `ayoubattar.me` | Free 1 year | Needs student email |
-
-### Get ayoubattar.is-a.dev (free forever):
-
-1. Go to [github.com/is-a-dev/register](https://github.com/is-a-dev/register)
-2. Fork the repo
-3. Create file: `domains/ayoubattar.json`
-4. Content:
-```json
-{
-  "owner": {
-    "username": "ATTARAYOUB"
-  },
-  "record": {
-    "CNAME": "attarayoub.vercel.app"
-  }
-}
-```
-5. Submit Pull Request
-6. Wait 1–2 days → live at `https://ayoubattar.is-a.dev` ✅
-
----
-
-## 🛠️ Troubleshooting
-
-| Problem | Fix |
-|---------|-----|
-| White screen after deploy | Check `base` in `vite.config.js` — Vercel/Netlify: `'/'`, GitHub Pages: `'/portfolio/'` |
-| Images not showing | `profile.png` must be in `public/` — use `src="/profile.png"` |
-| 404 on page refresh | `vercel.json` rewrites ✅ / `netlify.toml` redirects ✅ / `404.html` trick ✅ |
-| Build fails | Run `npm run build` locally first, fix errors, then push |
-| CV not opening | `cv-print.html` must be in `public/` folder |
+© 2025 Ayoub Attar — All rights reserved
