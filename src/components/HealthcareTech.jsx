@@ -59,18 +59,11 @@ const PILLARS = [
 
 /* ── Hospital references ────────────────────────────────── */
 const HOSPITALS = [
-  {
-    name:     'CHU Ibn Tofail – Marrakech',
-    type:     'University Hospital',
-    systems:  'BD Rowa VMAX 160 · Pyxis Medstation · HL7',
-    color:    '#2563EB',
-    bg:       '#EFF6FF',
-    border:   '#BFDBFE',
-  },
+
   {
     name:     'CHU Hassan II – Fès',
     type:     'University Hospital',
-    systems:  'BD Rowa VMAX 160 · Pyxis Medstation · HL7',
+    systems:  'Pyxis Medstation · 3500 · Procar',
     color:    '#0891B2',
     bg:       '#F0F9FF',
     border:   '#BAE6FD',
