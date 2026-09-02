@@ -13,7 +13,7 @@ const MHS_ROLE = {
   title:    'Maintenance Manager',
   company:  'Morocco Healthcare Supplier (MHS)',
   location: 'Morocco — Multi-site',
-  period:   'Jan 2023 — Present',
+  period:   'January 2023 — Present',
   current:  true,
   summary:
     'Hands-on technical manager responsible for the installation, deployment, and maintenance of hospital pharmacy automation systems across multiple clinical sites in Morocco. Combining biomedical engineering expertise with software integration skills to ensure high-availability pharmacy operations.',
