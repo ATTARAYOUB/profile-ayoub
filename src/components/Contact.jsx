@@ -188,9 +188,9 @@ export default function Contact() {
               <div className="mb-5 p-4 rounded-lg bg-[#ECFDF5] border border-[#A7F3D0] flex items-start gap-2.5">
                 <FiCheckCircle size={16} className="text-[#059669] flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm text-[#065F46] font-semibold">Message sent!</p>
+                  <p className="text-sm text-[#065F46] font-semibold">✅ Message sent successfully!</p>
                   <p className="text-xs text-[#047857] mt-0.5">
-                    Thank you — Ayoub will get back to you within 24–48 hours.
+                    Thank you for reaching out — we will answer you as soon as possible.
                   </p>
                 </div>
               </div>
