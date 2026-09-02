@@ -7,47 +7,43 @@ export default {
   theme: {
     extend: {
       colors: {
-        cyan: {
-          400: '#00d4ff',
-          500: '#00b8e0',
-          600: '#0099bb',
-        },
-        dark: {
-          900: '#0a0a0f',
-          800: '#0f0f1a',
-          700: '#141428',
-          600: '#1a1a35',
-        },
+        navy:    { DEFAULT: '#0F172A', 800: '#1E293B', 700: '#334155', 600: '#475569' },
+        electric:{ DEFAULT: '#2563EB', light: '#3B82F6', dark: '#1D4ED8' },
+        teal:    { DEFAULT: '#06B6D4', light: '#22D3EE', dark: '#0891B2' },
+        offwhite:{ DEFAULT: '#F8FAFC', 100: '#F1F5F9', 200: '#E2E8F0' },
+        slate:   { DEFAULT: '#1E293B', 500: '#64748B', 400: '#94A3B8', 300: '#CBD5E1' },
+        emerald: { DEFAULT: '#10B981', light: '#34D399', dark: '#059669' },
       },
       fontFamily: {
-        orbitron: ['Orbitron', 'sans-serif'],
-        dm:       ['DM Sans', 'sans-serif'],
+        inter:   ['Inter', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        sans:    ['Inter', 'sans-serif'],
       },
       animation: {
         float:        'float 6s ease-in-out infinite',
-        glow:         'glow 2s ease-in-out infinite alternate',
-        shimmer:      'shimmer 2s linear infinite',
-        'spin-slow':  'spin 8s linear infinite',
         'pulse-slow': 'pulse 3s ease-in-out infinite',
-        blink:        'blink 0.75s step-end infinite',
+        'fade-in':    'fadeIn 0.6s ease-out forwards',
+        'slide-up':   'slideUp 0.6s ease-out forwards',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%':      { transform: 'translateY(-8px)' },
         },
-        glow: {
-          from: { boxShadow: '0 0 10px rgba(0,212,255,0.3)' },
-          to:   { boxShadow: '0 0 25px rgba(0,212,255,0.7)' },
+        fadeIn: {
+          from: { opacity: 0 },
+          to:   { opacity: 1 },
         },
-        shimmer: {
-          '0%':   { backgroundPosition: '-200% center' },
-          '100%': { backgroundPosition:  '200% center' },
+        slideUp: {
+          from: { opacity: 0, transform: 'translateY(20px)' },
+          to:   { opacity: 1, transform: 'translateY(0)' },
         },
-        blink: {
-          '0%, 100%': { opacity: 1 },
-          '50%':      { opacity: 0 },
-        },
+      },
+      boxShadow: {
+        card:    '0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 16px 0 rgba(0,0,0,0.06)',
+        'card-hover': '0 4px 20px 0 rgba(0,0,0,0.12), 0 8px 32px 0 rgba(37,99,235,0.08)',
+        'blue':  '0 4px 24px 0 rgba(37,99,235,0.25)',
+        'teal':  '0 4px 24px 0 rgba(6,182,212,0.25)',
       },
     },
   },
