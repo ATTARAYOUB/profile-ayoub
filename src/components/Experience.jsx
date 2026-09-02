@@ -4,36 +4,36 @@ import { FiBriefcase, FiCalendar, FiMapPin, FiChevronDown, FiChevronUp } from 'r
 const JOBS = [
   {
     title:    'Maintenance Manager',
-    company:  'Morocco Healthcare Supplier (CHU Marrakech & Fès)',
+    company:  'Morocco Healthcare Supplier (MHS)',
     location: 'Fès & Marrakech, Morocco',
     period:   'Jan 2023 — Present',
     current:  true,
     bullets: [
-      'Maintain and troubleshoot BD Rowa VMAX 160 and Pyxis Medstation 3500/4000/ES systems across major university hospitals, ensuring high uptime for automated pharmacy dispensing.',
-      'Lead HL7 integration between automation systems and hospital information systems, reducing manual medication errors and improving workflow efficiency.',
-      'Coordinate with vendors and hospital IT teams on server administration, CCE systems, and spare parts logistics for multiple sites.',
-      'Train pharmacists and technicians on system usage and safety protocols, improving adoption and reducing user errors.',
+      'Perform preventive and curative maintenance on BD Rowa™ VMAX 160 and Pyxis Medstation 3500/4000/ES (v1.3–v1.7) automated dispensing systems and SupplyStation units across multiple hospital sites.',
+      'Manage HL7 integration and CCE systems, including server administration for connected pharmacy automation equipment.',
+      'Provide technical support and hands-on training to hospital pharmacy and clinical staff on equipment use and troubleshooting.',
+      'Coordinate with suppliers and manage spare-parts inventory to minimise equipment downtime.',
     ],
   },
   {
-    title:    'Medical Expert – IT Manager',
-    company:  'Private Clinic',
+    title:    'IT Manager & Medical Equipment Expert',
+    company:  'Private Medical Structure',
     location: 'Casablanca, Morocco',
     period:   'May 2022 — Feb 2023',
     bullets: [
-      'Maintained and repaired IT hardware: computers, printers, servers.',
-      'Provided helpdesk support, resolved incidents, and assisted in software development.',
-      'Combined biomedical maintenance with IT infrastructure tasks.',
+      'Maintained IT hardware infrastructure, including computers, printers, and servers, for a private healthcare facility.',
+      'Delivered helpdesk support, resolved technical incidents, and assisted with internal software development.',
+      'Combined biomedical equipment maintenance with day-to-day IT infrastructure management.',
     ],
   },
   {
-    title:    'Graphic Designer & E‑Commerce Entrepreneur',
-    company:  'CoolWord — Redbubble',
+    title:    'Founder & Graphic Designer',
+    company:  'CoolWord Store — Redbubble',
     location: 'Remote',
     period:   'Mar 2022 — Jun 2022',
     bullets: [
-      'Founded and managed "CoolWord" store on Redbubble.',
-      'Created original designs, handled product quality, branding, and sales analysis.',
+      'Founded and managed an independent online store on the Redbubble e-commerce platform.',
+      'Created original designs and managed branding, marketing, and sales analysis.',
     ],
   },
   {
@@ -42,18 +42,17 @@ const JOBS = [
     location: 'Casablanca, Morocco',
     period:   'Jan 2021 — Mar 2021',
     bullets: [
-      'Maintained IT peripherals, servers, and SQL Server support.',
-      'Provided employee technical assistance and troubleshooting.',
+      'Supported IT peripherals, servers, and SQL Server databases.',
+      'Provided technical assistance and troubleshooting support to employees.',
     ],
   },
   {
-    title:    'Software Programmer Intern',
+    title:    'Software Developer Intern',
     company:  'Institut Marsoul',
     location: 'Remote',
     period:   'Jun 2020 — Dec 2020',
     bullets: [
-      'Designed a desktop application for schedules & invoicing.',
-      'Used Java, JSP, Hibernate, Oracle, and CSS.',
+      'Built a desktop application for class scheduling and invoicing management using Java, JSP, Hibernate, Oracle, and CSS.',
     ],
   },
   {
@@ -62,9 +61,7 @@ const JOBS = [
     location: 'Casablanca, Morocco',
     period:   'Jan 2020 — Mar 2020',
     bullets: [
-      'Built and deployed the company website using HTML, CSS, JavaScript, and Bootstrap.',
-      'Integrated dynamic content and contact forms.',
-      'Collaborated with the team to align design with brand identity.',
+      'Developed a website template for accounting and internal operations using HTML5, CSS3, JavaScript, Bootstrap, and jQuery.',
     ],
   },
 ]
@@ -77,7 +74,10 @@ function JobCard({ job, index }) {
       {/* Timeline dot */}
       <div
         className="absolute left-[11px] top-6 w-[18px] h-[18px] rounded-full border-[3px] border-white shadow-sm z-10"
-        style={{ background: job.current ? '#2563EB' : '#94A3B8', boxShadow: job.current ? '0 0 0 3px rgba(37,99,235,0.2)' : 'none' }}
+        style={{
+          background:  job.current ? '#2563EB' : '#94A3B8',
+          boxShadow:   job.current ? '0 0 0 3px rgba(37,99,235,0.2)' : 'none',
+        }}
       />
 
       <div className="card p-5 hover:border-[#BFDBFE] transition-all">
@@ -105,7 +105,10 @@ function JobCard({ job, index }) {
               </span>
             </div>
           </div>
-          <button className="text-[#94A3B8] hover:text-[#2563EB] transition-colors flex-shrink-0 mt-1">
+          <button
+            className="text-[#94A3B8] hover:text-[#2563EB] transition-colors flex-shrink-0 mt-1"
+            aria-label={open ? 'Collapse' : 'Expand'}
+          >
             {open ? <FiChevronUp size={18} /> : <FiChevronDown size={18} />}
           </button>
         </div>
@@ -139,8 +142,8 @@ export default function Experience() {
           <h2 className="section-title">Work History</h2>
           <div className="accent-bar" />
           <p className="section-subtitle">
-            From hospital pharmacy automation to full‑stack development — a track record of delivering
-            reliable solutions in demanding environments.
+            5+ years bridging biomedical engineering and software — from hospital pharmacy automation
+            to full‑stack development across multiple sites and industries.
           </p>
         </div>
 
@@ -151,7 +154,6 @@ export default function Experience() {
             className="absolute left-5 top-0 bottom-0 w-[2px] rounded-full"
             style={{ background: 'linear-gradient(to bottom, #2563EB, #06B6D4, #E2E8F0)' }}
           />
-
           {JOBS.map((job, i) => (
             <JobCard key={i} job={job} index={i} />
           ))}

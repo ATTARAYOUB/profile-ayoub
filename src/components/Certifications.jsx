@@ -4,7 +4,7 @@ import { MdAutoGraph } from 'react-icons/md'
 
 const CERTS = [
   {
-    title:   'Professional',
+    title:   'Python Development Professional',
     issuer:  'GTF Education',
     date:    'December 2025',
     id:      '8244129795AA',
@@ -14,7 +14,7 @@ const CERTS = [
     border:  '#BFDBFE',
   },
   {
-    title:   'Data Science',
+    title:   'What Is Data Science?',
     issuer:  'IBM / Coursera',
     date:    'January 2024',
     id:      'ZNJTGGJL7PLD',
@@ -24,7 +24,7 @@ const CERTS = [
     border:  '#BAE6FD',
   },
   {
-    title:   'Project Management',
+    title:   'Jira Project Management',
     issuer:  'Great Learning',
     date:    '2023',
     id:      null,
@@ -34,7 +34,7 @@ const CERTS = [
     border:  '#A7F3D0',
   },
   {
-    title:   'Career Skills',
+    title:   'Career Skills in Software Development',
     issuer:  'LinkedIn Learning',
     date:    '2023',
     id:      null,
@@ -44,7 +44,7 @@ const CERTS = [
     border:  '#BFDBFE',
   },
   {
-    title:   'AI / Deep Learning',
+    title:   'Deep Learning with Python, Part 1',
     issuer:  'Udemy',
     date:    'January 2020',
     id:      'UC-8e63cdba-c74d-4816-899f-a5f6dd7f415f',
@@ -54,7 +54,7 @@ const CERTS = [
     border:  '#DDD6FE',
   },
   {
-    title:   'Frontend Development',
+    title:   'JavaScript',
     issuer:  'Udemy',
     date:    'January 2020',
     id:      'UC-9c920bb8-ce22-445c-828b-fd2a1c1058ae',
@@ -64,7 +64,7 @@ const CERTS = [
     border:  '#FED7AA',
   },
   {
-    title:   'Web Fundamentals',
+    title:   'HTML & CSS Programming',
     issuer:  'Udemy',
     date:    'January 2020',
     id:      'UC-c77979c9-6d2d-4bdf-bf42-e034800f71fd',
@@ -74,9 +74,9 @@ const CERTS = [
     border:  '#FED7AA',
   },
   {
-    title:   'Language — B2 English',
+    title:   'English Certificate — Level 8 (B2)',
     issuer:  'Wall Street English Morocco',
-    date:    'January 2020',
+    date:    '2020',
     id:      null,
     url:     '#',
     color:   '#0F172A',
@@ -98,7 +98,8 @@ export default function Certifications() {
           <h2 className="section-title">Verified Credentials</h2>
           <div className="accent-bar" />
           <p className="section-subtitle">
-            Verified credentials from global platforms, covering software, data, AI, and professional skills.
+            8 verified credentials from global platforms covering software development, data science,
+            AI, project management, and professional skills.
           </p>
         </div>
 
@@ -141,17 +142,17 @@ export default function Certifications() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-1.5 text-xs font-semibold py-2 px-3 rounded-lg transition-all"
                   style={{
-                    color: c.color,
+                    color:      c.color,
                     background: `${c.color}10`,
-                    border: `1px solid ${c.color}30`,
+                    border:     `1px solid ${c.color}30`,
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.background = `${c.color}20`
-                    e.currentTarget.style.borderColor = `${c.color}60`
+                    e.currentTarget.style.background   = `${c.color}20`
+                    e.currentTarget.style.borderColor  = `${c.color}60`
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.background = `${c.color}10`
-                    e.currentTarget.style.borderColor = `${c.color}30`
+                    e.currentTarget.style.background   = `${c.color}10`
+                    e.currentTarget.style.borderColor  = `${c.color}30`
                   }}
                 >
                   <FiExternalLink size={12} /> View Certificate
